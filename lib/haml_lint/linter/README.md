@@ -22,6 +22,7 @@ Below is a list of linters supported by `haml-lint`, ordered alphabetically.
 * [MultilinePipe](#multilinepipe)
 * [MultilineScript](#multilinescript)
 * [ObjectReferenceAttributes](#objectreferenceattributes)
+* [PlainText](#plaintext)
 * [RepeatedId](#repeatedid)
 * [RuboCop](#rubocop)
 * [RubyComments](#rubycomments)
@@ -524,6 +525,22 @@ where in your code a particular class attribute is defined. It is also tied
 directly to the class names of the objects you pass to it, creating an
 unnecessary coupling which can make refactoring your models affect your
 views.
+
+## PlainText
+
+Don't use plain text on views. All text should be translated using I18n across all views.
+
+**Bad**
+```haml
+%div Some text
+```
+
+**Good**
+```haml
+%div= t('.some_text')
+```
+
+This facilitates the use of multiple languages.
 
 ## RepeatedId
 
