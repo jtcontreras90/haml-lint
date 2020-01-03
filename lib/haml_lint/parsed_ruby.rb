@@ -20,5 +20,35 @@ module HamlLint
 
       syntax_tree.ivar_type? || syntax_tree.each_descendant.any?(&:ivar_type?)
     end
+
+    # Checks whether the syntax tree contains any plain text.
+    #
+    # @return [true, false]
+    def contains_plain_text?
+      return false unless syntax_tree
+
+      plain_text? || syntax_tree.each_descendant.any? do |descendant|
+        ParsedRuby.new(descendant).contains_plain_text?
+      end
+    end
+
+    def plain_text?
+      string? && !param_string?
+    end
+
+    def string?
+      syntax_tree.str_type? && alphabetic?
+    end
+
+    def alphabetic?
+      ALPHABETIC =~ syntax_tree.source
+    end
+
+    def param?
+      parent_node = syntax_tree.parent
+      return false unless parent_node
+
+      parent_node.send_type? || parent_node.pair_type?
+    end
   end
 end
