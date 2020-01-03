@@ -79,6 +79,9 @@ linters:
   ObjectReferenceAttributes:
     enabled: true
 
+  PlainText:
+    enabled: false
+
   RepeatedId:
     enabled: true
     severity: error
