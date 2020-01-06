@@ -231,6 +231,16 @@ module HamlLint::Tree
       (@value[:value] if @value[:parse]) || ''
     end
 
+    # Returns the plain text inside this tag, if any.
+    #
+    # @example For `%tag Hello`, this returns:
+    #   "Hello"
+    #
+    # @return [String]
+    def text
+      (@value[:value].strip unless contains_script?) || ''
+    end
+
     private
 
     def existing_attributes
