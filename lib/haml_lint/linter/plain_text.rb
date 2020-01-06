@@ -5,7 +5,7 @@ module HamlLint
   class Linter::PlainText < Linter
     include LinterRegistry
 
-    MESSAGE_FORMAT = %{`%s` should be translated}.freeze
+    MESSAGE_FORMAT = %{`%s` should be translated}
 
     # Checks for plain text in script nodes
     #
@@ -14,7 +14,6 @@ module HamlLint
     def visit_script(node)
       check_script(node)
     end
-
 
     # Checks for plain text in tag nodes
     #
@@ -29,16 +28,16 @@ module HamlLint
       check_tag_value(node)
     end
 
-
     # Checks for plain text in plain nodes
     #
     # @param [HamlLint::Tree:PlainNode]
     # @return [void]
     def visit_plain(node)
-      return unless alphabetic?(node.text.strip) &&
-                    !special_html?(node.text.strip)
+      text = node.text.strip
+      return unless alphabetic?(text) &&
+                    !special_html?(text)
 
-      record(node, node.text.strip)
+      record(node, text)
     end
 
     private
