@@ -78,6 +78,22 @@ module HamlLint
       string[/\A\s*"(.*)"\s*\z/, 1]
     end
 
+    # Returns whether a string has alphabetic characters.
+    #
+    # @param string [String]
+    # @return [true,false]
+    def alphabetic?(string)
+      /.*[a-zA-Z].*$/ =~ string
+    end
+
+    # Returns whether a string is a HTML special character.
+    #
+    # @param string [String]
+    # @return [true,false]
+    def html_char?(string)
+      /&\w*\;/ =~ string
+    end
+
     # Returns whether a string contains any interpolation.
     #
     # @param string [String]
